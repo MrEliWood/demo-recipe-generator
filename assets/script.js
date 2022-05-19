@@ -19,7 +19,7 @@ if (test) {
 // get all ingredients
 $(function () {
 
-    // Ingredients List //
+    // Meal Ingredients List //
     fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list')
         .then(function (response) {
             return response.json()
@@ -33,18 +33,40 @@ $(function () {
         })
         .catch(err => alert(err));
 
-    restriction.autocomplete({
-        source: allIngredients,
-        position: {
-            my : "center top", at: "center bottom"
-        },
-        select: function(event, ui) {
-            event.preventDefault();
-            restriction.val(ui.item.value);
-            addRestriction();
-        }
-    });
+    // Drink Ingredients List //
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (data) {
 
+            console.log(data)
+
+            for (var i = 0; i < data.drinks.length; i++) {
+                allIngredients.push(data.drinks[i].strIngredient1);
+            };
+
+        })
+        .catch(err => alert(err));
+
+});
+
+// autocomplete ingredients
+restriction.autocomplete({
+    source: allIngredients,
+    position: {
+        my: "center top", at: "center bottom"
+    },
+    select: function (event, ui) {
+        event.preventDefault();
+
+        if ($('#chosen-restrictions').is(':empty')) {
+            $('#no-restrictions').attr('class', 'fade-out');
+        };
+
+        restriction.val(ui.item.value);
+        addRestriction();
+    }
 });
 
 // add restrictions
@@ -54,19 +76,18 @@ function addRestriction() {
     } else if (allRestrictions.includes(restriction.val().trim())) {
         return;
     } else {
-        for (let i = 0; i < allIngredients.length; i++) {
-            if (allIngredients[i].toLowerCase().indexOf(restriction.val().trim().toLowerCase()) >= 0) {
 
+        for (let i = 0; i < allIngredients.length; i++) {
+
+            if (allIngredients[i].toLowerCase().indexOf(restriction.val().trim().toLowerCase()) >= 0) {
                 $('#chosen-restrictions').append(`<p>${allIngredients[i]}</p>`);
                 allRestrictions.push(allIngredients[i]);
-
             };
+            
         };
 
         restriction.val('');
-        // restriction.attr('placeholder','');
         restriction.addClass('placeholder-hidden');
-
     };
 };
 
@@ -75,7 +96,7 @@ $('#chosen-restrictions').click(function (event) {
 
     event.preventDefault();
 
-    allRestrictions = $.grep(allRestrictions, function(value) {
+    allRestrictions = $.grep(allRestrictions, function (value) {
         return value != event.target.innerText;
     });
 
@@ -84,12 +105,12 @@ $('#chosen-restrictions').click(function (event) {
 });
 
 // hide vacant recipe sections
-function isEmpty(){
+function isEmpty() {
 
     for (let i = 0; i < $('.recipe-content').length; i++) {
-        
+
         if ($($('.recipe-content')[i]).is(":empty")) {
-           $($('.recipe-content')[i]).parent().attr("class", "hidden")
+            $($('.recipe-content')[i]).parent().attr("class", "hidden")
         };
 
     };
@@ -99,7 +120,7 @@ function isEmpty(){
 // get recipes
 function recipeGrabber() {
 
-    for (let n = 1; n < 8; n++) {
+    for (let n = 1; n < 2; n++) {
 
         function appetizer() {
 
@@ -155,12 +176,17 @@ function recipeGrabber() {
 
                             for (let i = 0; i < ingredientsList.length; i++) {
                                 if (ingredientsList[i] && measureList[i]) {
-                                    $(`#day${n}-app-content`).append(`<p class="ingredient">${measureList[i]} ${ingredientsList[i]}</p>`);
+                                    $(`#day${n}-app-content`).append(`
+                                    <div class="ingredient-line">
+                                    <img class="ingredient-image" src="https://www.themealdb.com/images/ingredients/${ingredientsList[i]}.png" alt="${ingredientsList[i]} Thumbnail">
+                                    <p class="ingredient">${measureList[i]} ${ingredientsList[i]}</p>
+                                    </div>
+                                    `);
                                 };
                             };
 
                             $(`#day${n}-app-content`).append(`<p class="instructions">${instructions}</p>`);
-                            $(`#day${n}-app-content`).parent().attr('class', 'card block' )
+                            $(`#day${n}-app-content`).parent().attr('class', 'card block')
 
                         })
                         .catch(err => console.error(err));
@@ -221,12 +247,17 @@ function recipeGrabber() {
 
                         for (let i = 0; i < ingredientsList.length; i++) {
                             if (ingredientsList[i] && measureList[i]) {
-                                $(`#day${n}-entree-content`).append(`<p class="ingredient">${measureList[i]} ${ingredientsList[i]}</p>`);
+                                $(`#day${n}-entree-content`).append(`
+                                <div class="ingredient-line">
+                                    <img class="ingredient-image" src="https://www.themealdb.com/images/ingredients/${ingredientsList[i]}.png" alt="${ingredientsList[i]} Thumbnail">
+                                    <p class="ingredient">${measureList[i]} ${ingredientsList[i]}</p>
+                                    </div>
+                                    `);
                             };
                         };
 
                         $(`#day${n}-entree-content`).append(`<p class="instructions">${instructions}</p>`);
-                        $(`#day${n}-entree-content`).parent().attr('class', 'card block' )
+                        $(`#day${n}-entree-content`).parent().attr('class', 'card block')
 
                     }
 
@@ -292,12 +323,17 @@ function recipeGrabber() {
 
                             for (let i = 0; i < ingredientsList.length; i++) {
                                 if (ingredientsList[i] && measureList[i]) {
-                                    $(`#day${n}-dessert-content`).append(`<p class="ingredient">${measureList[i]} ${ingredientsList[i]}</p>`);
+                                    $(`#day${n}-dessert-content`).append(`
+                                    <div class="ingredient-line">
+                                    <img class="ingredient-image" src="https://www.themealdb.com/images/ingredients/${ingredientsList[i]}.png" alt="${ingredientsList[i]} Thumbnail">
+                                    <p class="ingredient">${measureList[i]} ${ingredientsList[i]}</p>
+                                    </div>
+                                    `);
                                 };
                             };
 
                             $(`#day${n}-dessert-content`).append(`<p class="instructions">${instructions}</p>`);
-                            $(`#day${n}-dessert-content`).parent().attr('class', 'card block' )
+                            $(`#day${n}-dessert-content`).parent().attr('class', 'card block')
 
                         })
                         .catch(err => console.error(err));
@@ -354,7 +390,12 @@ function recipeGrabber() {
 
                     for (let i = 0; i < ingredientsList.length; i++) {
                         if (ingredientsList[i] && measureList[i]) {
-                            $(`#day${n}-cocktails-content`).append(`<p class="ingredient">${measureList[i]} ${ingredientsList[i]}</p>`);
+                            $(`#day${n}-cocktails-content`).append(`
+                            <div class="ingredient-line">
+                                    <img class="ingredient-image" src="https://www.thecocktaildb.com/images/ingredients/${ingredientsList[i]}.png" alt="${ingredientsList[i]} Thumbnail">
+                                    <p class="ingredient">${measureList[i]} ${ingredientsList[i]}</p>
+                                    </div>
+                                    `);
                         };
                     };
 
@@ -384,7 +425,7 @@ function recipeGrabber() {
 };
 
 // listen for continue button clicks
-$('#continue-button').click(function(event) {
+$('#continue-button').click(function (event) {
 
     event.preventDefault();
 
@@ -401,6 +442,13 @@ $('#continue-button').click(function(event) {
         // page
         $('#restrictions-page').addClass('scroll-up');
         setTimeout(() => restriction.focus(), 1500);
+        setTimeout(() => {
+
+            if ($('#chosen-restrictions').is(':empty')) {
+                $('#no-restrictions').attr('class', 'fade-in');
+            };
+
+        }, 8000);
 
     } else if (next.attr("class") === "section-two") {
 
@@ -432,7 +480,7 @@ $('#continue-button').click(function(event) {
         $('#restrictions-page').addClass('scroll-down');
 
         // reset content
-        setTimeout(function() {
+        setTimeout(function () {
             $('#results-page').attr('class', '');
             $('#restrictions-page').attr('class', '');
             $('.card').children('img').remove();
@@ -445,7 +493,7 @@ $('#continue-button').click(function(event) {
 });
 
 // listen for start over button clicks
-$('#start-over').click(function(event) {
+$('#start-over').click(function (event) {
 
     event.preventDefault();
 
@@ -463,9 +511,10 @@ $('#start-over').click(function(event) {
         $('#restrictions-page').addClass('scroll-down');
 
         // reset content
-        setTimeout(function() {
+        setTimeout(function () {
             $('#restrictions-page').attr('class', '');
             $('#start-over').attr('class', 'hidden');
+            $('#no-restrictions').attr('class', 'hidden');
         }, 1000);
 
     } else if (next.attr("class") === "section-three") {
@@ -484,7 +533,7 @@ $('#start-over').click(function(event) {
         $('#restrictions-page').children().attr('class', 'fade-in');
 
         // reset content
-        setTimeout(function() {
+        setTimeout(function () {
             $('#results-page').attr('class', '');
             $('#restrictions-page').attr('class', '');
             $('.card').children('img').remove();
@@ -497,7 +546,7 @@ $('#start-over').click(function(event) {
 });
 
 // daily planner tabs
-$('#day-tabs').click(function() {
+$('#day-tabs').click(function () {
 
     for (let i = 1; i < 8; i++) {
 

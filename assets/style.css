@@ -202,11 +202,11 @@ h5 {
 
 /* transition classes */
 .scroll-up {
-    animation: scroll-up 0.5s forwards;
+    animation: scroll-up 1s forwards;
 }
 
 .scroll-down {
-    animation: scroll-down 0.5s forwards;
+    animation: scroll-down 1s forwards;
 }
 
 .fade-out-up {
@@ -587,6 +587,12 @@ button:hover {
     color: var(--dark);
 }
 
+#no-restrictions {
+    position: absolute;
+    bottom: 150px;
+    text-align: center;
+}
+
 /* search results */
 #results-page {
     display: flex;
@@ -622,16 +628,13 @@ button:hover {
 }
 
 .card img {
-    width: 20vw;
-    height: 20vw;
+    width: 40%;
     border-radius: 5px;
     margin: 0px 30px 0px 0px;
 }
 
 .background-blur {
     background: var(--light90);
-    -webkit-backdrop-filter: blur(50px);
-    backdrop-filter: blur(50px);
     border-radius: 5px;
 }
 
@@ -641,15 +644,18 @@ button:hover {
     justify-content: flex-start;
     align-items: flex-start;
     border-radius: 5px;
-    padding: 30px 50px;
+    padding: 50px;
     margin: auto;
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
 }
 
 .recipe-content {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: flex-start;
     align-items: flex-start;
+    flex-wrap: wrap;
     width: auto;
     margin: 0px auto 0px 0px;
 }
@@ -657,16 +663,32 @@ button:hover {
 .recipe-content h1 {
     width: 100%;
     border-bottom: 1px solid var(--dark);
-    padding-bottom: 15px;
-    margin-bottom: 30px;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+}
+
+.ingredient-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 45%;
+    margin: 5px 15px 5px 15px;
+}
+
+.ingredient-image {
+    width: 30px !important;
+    height: 30px !important;
+    margin: 0px !important;
 }
 
 .ingredient {
-    margin: 5px;
+    overflow-wrap: anywhere;
+    margin: 5px 0px 5px 20px;
 }
 
 .instructions {
-    margin-top: 30px;
+    line-height: 1.25;
+    margin-top: 35px;
 }
 
 .tab-radio {
