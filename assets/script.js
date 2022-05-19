@@ -392,7 +392,6 @@ $('#continue-button').click(function(event) {
 
         // button
         next.attr("class", "section-two");
-        $('#continue-button').attr('class', 'dark-button');
 
         // caption
         $('#caption-one').attr('class', 'fade-out-up');
@@ -407,14 +406,14 @@ $('#continue-button').click(function(event) {
 
         // button
         next.attr("class", "section-three");
-        $('#continue-button').text('Change Selections');
 
         // caption
         $('#caption-two').attr('class', 'fade-out-up');
         $('#caption-three').attr('class', 'fade-in-up');
 
         // page
-        $('#results-page').addClass('scroll-up');
+        $('#restrictions-page').children().addClass('fade-out');
+        setTimeout(() => $('#results-page').addClass('scroll-up'), 1000);
         recipeGrabber();
 
     } else if (next.attr("class") === "section-three") {
@@ -422,7 +421,6 @@ $('#continue-button').click(function(event) {
         // button
         next.attr("class", "section-one");
         $('#continue-button').text('Continue');
-        $('#continue-button').attr('class', 'light-button');
 
         // caption
         $('#caption-three').attr('class', 'fade-out-down');
@@ -446,6 +444,7 @@ $('#continue-button').click(function(event) {
 
 });
 
+// listen for start over button clicks
 $('#start-over').click(function(event) {
 
     event.preventDefault();
@@ -473,7 +472,6 @@ $('#start-over').click(function(event) {
 
         // button
         next.attr("class", "section-one");
-        $('#continue-button').text('Continue');
 
         // caption
         $('#caption-three').attr('class', 'fade-out-down');
@@ -483,6 +481,7 @@ $('#start-over').click(function(event) {
         // page
         $('#results-page').addClass('scroll-down');
         $('#restrictions-page').addClass('scroll-down');
+        $('#restrictions-page').children().attr('class', 'fade-in');
 
         // reset content
         setTimeout(function() {

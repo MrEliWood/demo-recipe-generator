@@ -11,7 +11,7 @@ h2 {
 
 h3 {
     font-size: 1.5em;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 h4 {
@@ -38,6 +38,7 @@ h5 {
     --dark50: rgba(0, 0, 0, 0.5);
     --dark25: rgba(0, 0, 0, 0.25);
     --dark10: rgba(0, 0, 0, 0.1);
+    --gray: rgb(30, 30, 30);
     --accent: #2196F3;
     --danger: rgb(220, 0, 0);
     --shadow: rgba(0, 0, 0, 0.25);
@@ -90,14 +91,14 @@ h5 {
     }
 
     to {
-        transform: translateY(-50px);
+        transform: translateY(-30px);
         opacity: 0;
     }
 }
 
 @keyframes fade-in-up {
     from {
-        transform: translateY(50px);
+        transform: translateY(30px);
         opacity: 0;
     }
 
@@ -155,6 +156,29 @@ h5 {
     }
 }
 
+@keyframes fade-in-up-big {
+    from {
+        transform: translateY(200px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out-down-big {
+    from {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(200px);
+        opacity: 0;
+    }
+}
 
 @keyframes scroll-up {
     from {
@@ -207,6 +231,14 @@ h5 {
 
 .fade-out-down-85 {
     animation: fade-out-down 0.5s forwards;
+}
+
+.fade-in {
+    animation: fade-in 0.5s forwards;
+}
+
+.fade-out {
+    animation: fade-out 0.5s forwards;
 }
 
 .hidden {
@@ -287,6 +319,18 @@ footer {
     z-index: 1;
 }
 
+#continue-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 30px;
+    text-decoration: none;
+    z-index: 99;
+}
+
 button {
     border: none;
     border-radius: 5px;
@@ -294,8 +338,10 @@ button {
     min-width: 200px;
     width: auto;
     box-shadow: 0px 0px 10px var(--shadow);
+    background: var(--light);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
+    color: var(--dark);
     font-weight: 500;
     opacity: 0.85;
 }
@@ -305,14 +351,12 @@ button:hover {
     opacity: 1;
 }
 
-.light-button {
-    background: var(--light);
-    color: var(--dark);
+.section-one {
+    animation: fade-in-up-big 1s forwards;
 }
 
-.dark-button {
-    background: var(--dark);
-    color: var(--light);
+.section-three {
+    animation: fade-out-down-big 1s forwards;
 }
 
 /* hide default checkbox */
@@ -437,7 +481,8 @@ button:hover {
     justify-content: flex-start;
     position: absolute;
     top: 100vh;
-    background-color: var(--light);
+    background-color: var(--gray);
+    color: var(--light);
     text-align: center;
     height: 100vh;
     width: 100%;
@@ -446,7 +491,7 @@ button:hover {
 }
 
 #ingredient-search {
-    border: 1px solid var(--dark25);
+    box-shadow: inset 0px 0px 2px var(--shadow);
     border-radius: 5px;
     width: 100%;
     max-width: 1000px;
@@ -476,7 +521,7 @@ button:hover {
     align-items: flex-start;
     align-self: center;
     background-color: var(--light);
-    border: 1px solid var(--dark25);
+    border-radius: 5px;
     width: 100%;
     max-width: 600px;
     max-height: 200px;
@@ -485,6 +530,7 @@ button:hover {
     overflow-x: visible;
     z-index: 2;
     user-select: none;
+    transform: translateY(5px);
 }
 
 .ui-autocomplete li {
@@ -495,7 +541,7 @@ button:hover {
 
 .ui-autocomplete li:hover {
     cursor: pointer;
-    background-color: var(--accent2);
+    background-color: var(--accent);
 }
 
 * html .ui-autocomplete {
@@ -516,7 +562,7 @@ button:hover {
 #chosen-restrictions p {
     transition: all 0.3s ease;
     color: var(--dark);
-    background-color: var(--dark10);
+    background-color: var(--light90);
     border-radius: 5px;
     user-select: none;
     line-height: 1;
@@ -526,7 +572,7 @@ button:hover {
 
 #chosen-restrictions p:hover {
     cursor: pointer;
-    opacity: 0.85;
+    /* opacity: 0.85; */
 }
 
 /* remove restriction */
@@ -543,12 +589,15 @@ button:hover {
 
 /* search results */
 #results-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
     top: 100vh;
-    background: var(--light);
+    background: var(--gray);
     width: 100%;
     height: 100vh;
-    padding: 120px 0px 0px 0px;
+    padding: 180px 50px 50px 0px;
     overflow: scroll;
     z-index: 3;
 }
@@ -562,6 +611,16 @@ button:hover {
     margin-bottom: 1.5rem;
 }
 
+.result {
+    margin-bottom: 50px;
+    max-width: 1600px;
+    border-radius: 5px;
+}
+
+.result:last-of-type {
+    margin-bottom: 70px;
+}
+
 .card img {
     width: 20vw;
     height: 20vw;
@@ -570,9 +629,10 @@ button:hover {
 }
 
 .background-blur {
-    background: var(--light75);
+    background: var(--light90);
     -webkit-backdrop-filter: blur(50px);
     backdrop-filter: blur(50px);
+    border-radius: 5px;
 }
 
 .card {
@@ -581,9 +641,7 @@ button:hover {
     justify-content: flex-start;
     align-items: flex-start;
     border-radius: 5px;
-    max-width: 1600px;
-    min-height: 60vh;
-    padding: 90px;
+    padding: 30px 50px;
     margin: auto;
 }
 
@@ -636,6 +694,18 @@ button:hover {
     margin: auto 5px;
     width: 200px;
     text-align: right;
+}
+
+.credit {
+    text-align: center;
+    color: var(--light);
+    text-decoration: none;
+}
+
+.credit a {
+    cursor: pointer;
+    color: var(--light);
+    text-decoration: none;
 }
 
 @media screen and (max-width: 992px) {
