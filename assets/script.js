@@ -10,11 +10,9 @@ var next = $('#continue-link');
 var allRestrictions = [];
 var allIngredients = [];
 
-var test = undefined
+var test = 'bananas'
 
-if (test) {
-    console.log('true')
-}
+console.log('TEST: ', test.slice(0,-1));
 
 // get all ingredients
 $(function () {
@@ -51,11 +49,43 @@ $(function () {
 
 });
 
+
+
+// add restrictions
+function addRestriction() {
+
+    let original = restriction.val().trim().toLowerCase();
+    let singular = restriction.val().trim().toLowerCase().slice(0,-1);
+    let plural = restriction.val().trim().toLowerCase() + 's';
+
+    if (restriction.val().trim() === "") {
+        return;
+    } else {
+
+        for (let i = 0; i < allIngredients.length; i++) {
+
+            if (allIngredients[i].toLowerCase() === original ||
+                allIngredients[i].toLowerCase() === singular ||
+                allIngredients[i].toLowerCase() === plural) {
+
+                    if (!allRestrictions.includes(allIngredients[i])) {
+                        $('#chosen-restrictions').append(`<p>${allIngredients[i]}</p>`);
+                        allRestrictions.push(allIngredients[i]);
+                    };
+                };
+            
+        };
+
+        restriction.val('');
+        restriction.addClass('placeholder-hidden');
+    };
+};
+
 // autocomplete ingredients
 restriction.autocomplete({
     source: allIngredients,
     position: {
-        my: "center top", at: "center bottom"
+        my: "center top", at: "center bottom+10px"
     },
     select: function (event, ui) {
         event.preventDefault();
@@ -69,27 +99,18 @@ restriction.autocomplete({
     }
 });
 
-// add restrictions
-function addRestriction() {
-    if (restriction.val().trim() === "") {
-        return;
-    } else if (allRestrictions.includes(restriction.val().trim())) {
-        return;
-    } else {
+// listen for enter key press during ingredient search
+$('#ingredient-search').on("keyup", function (event) {
 
-        for (let i = 0; i < allIngredients.length; i++) {
+    if (event.keyCode === 13) {
 
-            if (allIngredients[i].toLowerCase().indexOf(restriction.val().trim().toLowerCase()) >= 0) {
-                $('#chosen-restrictions').append(`<p>${allIngredients[i]}</p>`);
-                allRestrictions.push(allIngredients[i]);
-            };
-            
-        };
+        event.preventDefault();
+        restriction.autocomplete('close');
+        addRestriction();
 
-        restriction.val('');
-        restriction.addClass('placeholder-hidden');
-    };
-};
+    }
+
+});
 
 // remove restriction after adding
 $('#chosen-restrictions').click(function (event) {
@@ -172,6 +193,7 @@ function recipeGrabber() {
                                 'background-size': 'cover'
                             });
                             $(`#day${n}-appetizer`).append(`<img src="${thumbnail}"></img>`);
+                            $(`#day${n}-app-content`).append(`<h3>Appetizer</h3>`);
                             $(`#day${n}-app-content`).append(`<h1>${meal}</h1>`);
 
                             for (let i = 0; i < ingredientsList.length; i++) {
@@ -243,6 +265,7 @@ function recipeGrabber() {
                             'background-size': 'cover'
                         });
                         $(`#day${n}-entree`).append(`<img src="${thumbnail}"></img>`);
+                        $(`#day${n}-entree-content`).append(`<h3>Entrée</h3>`);
                         $(`#day${n}-entree-content`).append(`<h1>${meal}</h1>`);
 
                         for (let i = 0; i < ingredientsList.length; i++) {
@@ -319,6 +342,7 @@ function recipeGrabber() {
                                 'background-size': 'cover'
                             });
                             $(`#day${n}-dessert`).append(`<img src="${thumbnail}"></img>`);
+                            $(`#day${n}-dessert-content`).append(`<h3>Dessert</h3>`);
                             $(`#day${n}-dessert-content`).append(`<h1>${meal}</h1>`);
 
                             for (let i = 0; i < ingredientsList.length; i++) {
@@ -386,6 +410,7 @@ function recipeGrabber() {
                         'background-size': 'cover'
                     });
                     $(`#day${n}-cocktails`).append(`<img src="${thumbnail}"></img>`);
+                    $(`#day${n}-cocktails-content`).append(`<h3>Drink</h3>`);
                     $(`#day${n}-cocktails-content`).append(`<h1>${drink}</h1>`);
 
                     for (let i = 0; i < ingredientsList.length; i++) {
@@ -448,7 +473,7 @@ $('#continue-button').click(function (event) {
                 $('#no-restrictions').attr('class', 'fade-in');
             };
 
-        }, 8000);
+        }, 7000);
 
     } else if (next.attr("class") === "section-two") {
 

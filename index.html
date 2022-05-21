@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./assets/reset.css">
     <link rel="stylesheet" href="assets/style.css">
 
-    <title>WikiLeeks</title>
+    <title>Recipe Generator</title>
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.png">
 
 </head>
@@ -24,11 +24,11 @@
 
     <header>
 
-        <h1>WikiLeeks</h1>
+        <h1>Recipe Generator</h1>
 
         <h4 id="caption-one">Select the courses you want recipes for</h4>
         <h4 id="caption-two">Enter any dietary restrictions or foods you can't stand</h4>
-        <h4 id="caption-three">Bon appetite!</h4>
+        <h4 id="caption-three">Bon appétit!</h4>
 
         <button id="start-over" class="hidden">Start Over</button>
 
@@ -43,22 +43,22 @@
 
                 <div class="container app">
                     <input type="checkbox" class="checkbox" id="appetizer" name="appetizer">
-                    <label for="appetizer"><span class="large-checkbox"></span>Appetizer</label>
+                    <label class="container" for="appetizer">Appetizer</label>
                 </div>
 
                 <div class="container ent">
                     <input type="checkbox" class="checkbox" id="entree" name="entree">
-                    <label class="container" for="entree"><span class="large-checkbox"></span>Entrée</label>
+                    <label class="container" for="entree">Entrée</label>
                 </div>
 
                 <div class="container des">
-                    <input type="checkbox" class="checkbox" id="dessertPowderBlue" name="dessert">
-                    <label class="container" for="dessert"><span class="large-checkbox"></span>Dessert</label>
+                    <input type="checkbox" class="checkbox" id="dessert" name="dessert">
+                    <label class="container" for="dessert">Dessert</label>
                 </div>
 
                 <div class="container dri">
                     <input type="checkbox" class="checkbox" id="cocktails" name="cocktails">
-                    <label class="container" for="cocktails"><span class="large-checkbox"></span>Drinks</label>
+                    <label class="container" for="cocktails">Drinks</label>
                 </div>
 
             </div>
@@ -68,12 +68,12 @@
         <!-- dietary restrictions -->
         <div id="restrictions-page">
 
-            <h3>Search for ingredients you want to exclude from your recipes:</h3>
+            <h4>Search for ingredients you want to exclude from your recipes:</h4>
             <input id="ingredient-search" type="text" placeholder="something icky">
 
             <div id="chosen-restrictions"></div>
 
-            <p id="no-restrictions" class="hidden">If you eat everything, you can skip this step.</p>
+            <h4 id="no-restrictions" class="hidden">If you eat everything, you can skip this step.</h4>
 
         </div>
 
@@ -83,38 +83,31 @@
             <div id="day1" class="tab-content">
 
                 <div id="app-container" class="result">
-                    <div class="background-blur">
-                        <div id="day1-appetizer" class="card block">
-                            <div id="day1-app-content" class="recipe-content"></div>
-                        </div>
+                    <div id="day1-appetizer" class="card">
+                        <div id="day1-app-content" class="recipe-content"></div>
                     </div>
                 </div>
 
                 <div id="ent-container" class="result">
-                    <div class="background-blur">
-                        <div id="day1-entree" class="card block">
-                            <div id="day1-entree-content" class="recipe-content"></div>
-                        </div>
+                    <div id="day1-entree" class="card">
+                        <div id="day1-entree-content" class="recipe-content"></div>
                     </div>
                 </div>
 
                 <div id="des-container" class="result">
-                    <div class="background-blur">
-                        <div id="day1-dessert" class="card block">
-                            <div id="day1-dessert-content" class="recipe-content"></div>
-                        </div>
+                    <div id="day1-dessert" class="card">
+                        <div id="day1-dessert-content" class="recipe-content"></div>
                     </div>
                 </div>
 
                 <div id="dri-container" class="result">
-                    <div class="background-blur">
-                        <div id="day1-cocktails" class="card block">
-                            <div id="day1-cocktails-content" class="recipe-content"></div>
-                        </div>
+                    <div id="day1-cocktails" class="card">
+                        <div id="day1-cocktails-content" class="recipe-content"></div>
                     </div>
                 </div>
 
-                <p class="credit">Recipes provided by <a href="https://www.themealdb.com" target="_blank">TheMealDB</a> & <a href="https://www.thecocktaildb.com" target="_blank">TheCocktailDB</a></p>
+                <p class="credit">Recipes provided by <a href="https://www.themealdb.com" target="_blank">TheMealDB</a>
+                    & <a href="https://www.thecocktaildb.com" target="_blank">TheCocktailDB</a></p>
 
             </div>
 
