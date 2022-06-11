@@ -576,7 +576,6 @@ button:hover {
 
 #chosen-restrictions p:hover {
     cursor: pointer;
-    /* opacity: 0.85; */
 }
 
 /* remove restriction */
@@ -777,6 +776,43 @@ button:hover {
         font-size: 3vh;
     }
 
+    /* background images */
+    .app {
+        background: url("images/appetizer.jpg");
+        background-color: var(--dark);
+        height: 22vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .ent {
+        background: url("images/entree.jpg");
+        background-color: var(--dark);
+        height: 22vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .des {
+        background: url("images/dessert.jpg");
+        background-color: var(--dark);
+        height: 22vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .dri {
+        background: url("images/cocktail.jpg");
+        background-color: var(--dark);
+        height: 22vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
     /* search results */
     #results-page {
         padding: 120px 60px 60px 60px;
@@ -865,7 +901,7 @@ button:hover {
     #restrictions-page h4 {
         margin: 0px 20px;
     }
-    
+
     #ingredient-search {
         padding: 10px;
         margin: 30px 0px;
@@ -887,36 +923,36 @@ button:hover {
     .card img {
         margin: 0px 0px 15px 0px;
     }
-    
+
     .recipe-content h1 {
         padding-bottom: 10px;
         margin-bottom: 15px;
     }
-    
+
     .recipe-content h3 {
         margin: 0px 0px 5px 0px;
     }
-    
+
     .ingredient-line {
         width: 100%;
         margin: 5px 5px 5px 5px;
     }
-    
+
     .ingredient-image {
         width: 30px !important;
         height: 30px !important;
         border: none !important;
         margin: 0px !important;
     }
-    
+
     .ingredient {
         margin: 5px 0px 5px 15px;
     }
-    
+
     .instructions {
         margin-top: 15px;
     }
-    
+
     .credit {
         text-align: center;
         color: var(--light);
